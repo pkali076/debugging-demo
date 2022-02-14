@@ -1,7 +1,11 @@
 const fs = require('fs');
 
 const index = fs.readFileSync(`${__dirname}/../client/client.html`);
-const css = fs.readFileSync(`${__dirname}/../client/Style.css`);
+const css = fs.readFileSync(`${__dirname}/../client/style.css`);
+//IV -- heroku debugging
+//install heroku cli
+//Windows File System is not case-sensitive
+//since Heroku uses Linux File System, use case-sensitive file-names
 
 const getIndex = (request, response) => {
   response.writeHead(200, { 'Content-Type': 'text/html' });
