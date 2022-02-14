@@ -9,6 +9,7 @@ const http = require('http');
 const url = require('url');
 const query = require('querystring');
 const htmlHandler = require('./htmlResponses.js');
+//time to use the built-in debugger
 const jsonHandler = require('./jsonResponses.js');
 
 const port = process.env.PORT || process.env.NODE_PORT || 3000;
@@ -42,6 +43,8 @@ const handlePost = (request, response, parsedUrl) => {
 const handleGet = (request, response, parsedUrl) => {
   if (parsedUrl.pathname === '/style.css') {
     htmlHandler.getCSS(request, response);
+    //I.I error here. "typeError", that .getCSS is not a function
+    //--> go to htmlHandler --> htmlResponses
   } else if (parsedUrl.pathname === '/getUsers') {
     jsonHandler.getUsers(request, response);
   } else {
@@ -51,7 +54,8 @@ const handleGet = (request, response, parsedUrl) => {
 
 const onRequest = (request, response) => {
   const parsedUrl = url.parse(request.url);
-
+//III : debugging example
+//starts at the beginning of the line, at beginning -- no variables have been populated
   if (request.method === 'POST') {
     handlePost(request, response, parsedUrl);
   } else {

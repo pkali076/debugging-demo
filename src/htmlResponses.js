@@ -17,4 +17,6 @@ const getCSS = (request, response) => {
 
 module.exports = {
   getIndex,
+  //I.II getCSS was not exported for original issue
+  getCSS,
 };

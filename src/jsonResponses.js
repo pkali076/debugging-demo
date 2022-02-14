@@ -5,6 +5,8 @@ const users = {};
 const respondJSON = (request, response, status, object) => {
   response.writeHead(status, { 'Content-Type': 'application/json' });
   response.write(JSON.stringify(object));
+  //II.I error with ERR_STREAM_WRITE_AFTER_END
+  //trying to end response twice.. ---> line 44 in ./jsonResponses.js
   response.end();
 };
 
@@ -42,7 +44,9 @@ const addUser = (request, response, body) => {
 
   if (responseCode === 201) {
     responseJSON.message = 'Created Successfully';
-    respondJSON(request, response, responseCode, responseJSON);
+    //respondJSON(request, response, responseCode, responseJSON);
+    //II.II error cannot send two responses for one request.
+    //there must be a 1:1 ratio
     return respondJSON(request, response, responseCode, responseJSON);
   }
 
